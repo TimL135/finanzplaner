@@ -1,9 +1,3 @@
-var modalEinnahme = document.getElementById("einnahmeModal");
-var btnModalEinnahme = document.getElementById("einnahmeHinzufügen");
-
-var modalAusgabe = document.getElementById("ausgabeModal");
-var btnModalAusgabe = document.getElementById("ausgabeHinzufügen");
-
 var span = document.getElementsByClassName("close")[0];
 
 var btnEingabeEinnahme = document.getElementById("einnahmeBestätigung");
@@ -11,7 +5,6 @@ var btnEingabeAusgabe = document.getElementById("ausgabeBestätigung");
 
 var btnEingabePlan = document.getElementById("planBestätigung");
 var pläneerstellen = document.getElementById("pläneerstellen");
-var planCarousel = document.getElementById("planCarousel");
 
 var carouselAnzahl = 0;
 
@@ -76,33 +69,33 @@ btnEingabeAusgabe.onclick = function (event) {
 }
 
 btnEingabePlan.onclick = function (event) {
-    if (carouselAnzahl === 0) {
+    var planCarousel = document.getElementById("planCarousel");
+    var carouselItemFirst = document.getElementById("carouselItemFirst")
+    if (carouselAnzahl == 0) {
+        carouselAnzahl++;
         var planGrund = document.getElementById("planGrund").value;
         var planMenge = document.getElementById("planMenge").value;
         var planDauer = document.getElementById("planDauer").value;
         var plan = [planGrund, planMenge, planDauer];
-        var div = document.getElementById("carouselItemFirst");
-        div.removeChild(div.firstChild);
-        div.removeChild(div.firstChild);
-        div.removeChild(div.firstChild);
+        var div = document.createElement("div");
+        carouselItemFirst.removeChild(carouselItemFirst.firstChild);
+        carouselItemFirst.removeChild(carouselItemFirst.firstChild);
+        carouselItemFirst.removeChild(carouselItemFirst.firstChild);
         for (let i = 0; i < 3; i++) {
             var br = document.createElement("br");
             switch (i) {
-                case 0: div.appendChild(document.createTextNode(`Du sparst für: ${plan[i]}`)); break
-                case 1: div.appendChild(document.createTextNode(`Du sparst: ${plan[i]}€`)); break
-                case 2: div.appendChild(document.createTextNode(`Du sparst bis: ${plan[i]} Tage`)); break
+                case 0: carouselItemFirst.appendChild(document.createTextNode(`Du sparst für: ${plan[i]}`)); break
+                case 1: carouselItemFirst.appendChild(document.createTextNode(`Du sparst: ${plan[i]}€`)); break
+                case 2: carouselItemFirst.appendChild(document.createTextNode(`Du sparst bis: ${plan[i]} Tage`)); break
             }
 
-            div.appendChild(br)
+            carouselItemFirst.appendChild(br)
         }
-        s
-        div.classList.add("carousel-item", "aktive")
-        carouselItemFirst.appendChild(div);
+
+        planCarousel.appendChild(div);
         document.getElementById("planGrund").value = "";
         document.getElementById("planMenge").value = "";
         document.getElementById("planDauer").value = "";
-        carouselAnzahl++;
-
     } else {
         var planGrund = document.getElementById("planGrund").value;
         var planMenge = document.getElementById("planMenge").value;

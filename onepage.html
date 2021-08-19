@@ -172,8 +172,8 @@
                         <th style="text-align: center;">
                             Total:
                         </th>
-                        <th style="text-align: center;">
-                            0$
+                        <th style="text-align: center;" id="gesamt">
+                            0€
                         </th>
 
 
@@ -210,7 +210,8 @@
 
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" id="einnahmeMenge" placeholder="wie viel?">
+                            aria-describedby="inputGroup-sizing-lg" id="einnahmeMenge" placeholder="wie viel?"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" />
                     </div>
 
 
@@ -247,7 +248,8 @@
 
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" id="ausgabeMenge" placeholder="wie viel?">
+                            aria-describedby="inputGroup-sizing-lg" id="ausgabeMenge" placeholder="wie viel?"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" />
                     </div>
 
                 </div>
@@ -285,7 +287,8 @@
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-lg" placeholder="Wie viel möchtest du sparen?"
-                            id="planMenge">
+                            id="planMenge"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" />
                     </div>
 
                     <div class="input-group input-group-lg">
@@ -294,7 +297,8 @@
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-lg" placeholder="Wie lange möchtest du sparen?"
-                            id="planDauer">
+                            id="planDauer"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" />
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="onepage.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Finanzplaner</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="login.html">Log Out <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- navbar -->
+    <div class="container " id="maincontainer">
+        <!-- begrüßung -->
+        <h1>
+            <div id="begrußung" style="text-align: center;">
+            </div>
+            <br>
+        </h1>
+        <!-- begrüßung -->
+        <!-- pläne -->
+        <div id="divpläne" style="text-align: center;">
+            <h2>
+                Deine Pläne:
+            </h2>
+            <div id="pläneerstellen" style="text-align: center;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner " id="planCarousel" style="background: #343a40;color: white;">
+                        <div class="carousel-item active">
+                            <div class="container" id="carouselItemFirst">
+                                Du Hast noch keinen Plan
+                                <br>
+                                Drücke den Knopf um einen zu erstellen
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <button id=planHinzuFügenKnopf class="btn btn-dark pb-10 mt-4" data-toggle="modal" data-target="#planModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+                    class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </button>
+        </div>
+        <!-- pläne -->
+        <!-- einnahmen/ausgaben -->
+        <div class="mt-5">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr style="text-align: center;">
+                        <th scope="col">Einnahmen</th>
+                        <th scope="col">Ausgaben</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            <table class="table">
+                                <tr>
+                                    <th scope="col">Wo durch?</th>
+                                    <th scope="col">Wie viel?</th>
+                                    <th scope="col">Datum</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <ul id="einnahmeGrundListe">
+
+                                        </ul>
+                                    </th>
+                                    <th>
+                                        <ul id="einnahmeMengeListe">
+
+                                        </ul>
+                                    </th>
+                                    <th>
+                                        <ul id="einnahmeDatumListe">
+
+                                        </ul>
+                                    </th>
+                                </tr>
+
+
+
+                            </table>
+                        </th>
+                        <th>
+                            <table class="table">
+                                <tr>
+                                    <th scope="col">Wo für?</th>
+                                    <th scope="col">Wie viel?</th>
+                                    <th scope="col">Datum</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <ul id="ausgabeGrundListe">
+
+                                        </ul>
+                                    </th>
+                                    <th>
+                                        <ul id="ausgabeMengeListe">
+
+                                        </ul>
+                                    </th>
+                                    <th>
+                                        <ul id="ausgabeDatumListe">
+
+                                        </ul>
+                                    </th>
+                                </tr>
+                            </table>
+                        </th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr style="text-align: center;">
+                        <th>
+                            <button class="btn btn-dark "><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                    fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16"
+                                    id="einnahmeHinzufügen" data-toggle="modal" data-target="#einnahmeModal">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                </svg></button>
+                        </th>
+                        <th>
+                            <button class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                    fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16"
+                                    id="ausgabeHinzufügen" data-toggle="modal" data-target="#ausgabeModal">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                </svg></button>
+                        </th>
+
+                    </tr>
+
+                </tbody>
+                <tbody>
+                    <tr>
+                        <th style="text-align: center;">
+                            Total:
+                        </th>
+                        <th style="text-align: center;">
+                            0$
+                        </th>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- einnahmen/ausgaben -->
+    <!-- modale -->
+    <!-- einnahme -->
+    <div class="modal fade" id="einnahmeModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Einnahme</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" id="einnahmeGrund" placeholder="wo durch?">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" id="einnahmeMenge" placeholder="wie viel?">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        id="einnahmeBestätigung">Bestätigen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- einnahme -->
+    <!-- ausgabe -->
+    <div class="modal fade" id="ausgabeModal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Ausgabe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" id="ausgabeGrund" placeholder="wo für?">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" id="ausgabeMenge" placeholder="wie viel?">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        id="ausgabeBestätigung">Bestätigen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ausgabe -->
+    <!-- pläne -->
+    <div class="modal fade" id="planModal" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Plan erstellen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" placeholder="Für was möchtest du sparen?"
+                            id="planGrund">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" placeholder="Wie viel möchtest du sparen?"
+                            id="planMenge">
+                    </div>
+
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" placeholder="Wie lange möchtest du sparen?"
+                            id="planDauer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        id="planBestätigung">Bestätigen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- pläne -->
+    <!-- modale -->
+    <script src="onepage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

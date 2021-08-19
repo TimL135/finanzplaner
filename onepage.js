@@ -9,29 +9,18 @@ var span = document.getElementsByClassName("close")[0];
 var btnEingabeEinnahme = document.getElementById("einnahmeBestätigung");
 var btnEingabeAusgabe = document.getElementById("ausgabeBestätigung");
 
+var btnEingabePlan = document.getElementById("planBestätigung");
+var pläneerstellen = document.getElementById("pläneerstellen");
+var planCarousel = document.getElementById("planCarousel");
 
+var carouselAnzahl = 0;
 
-btnModalEinnahme.onclick = function () {
-    modalEinnahme.style.display = "block";
-}
-btnModalAusgabe.onclick = function () {
-    modalAusgabe.style.display = "block";
-}
-span.onclick = function () {
-    modalEinnahme.style.display = "none";
-    modalAusgabe.style.display = "none"
-}
+var begrußung = document.getElementById("begrußung");
+var div = document.createElement("div");
+var text = ` Guten Tag, User`;
+div.appendChild(document.createTextNode(text));
+begrußung.appendChild(div);
 
-window.onclick = function (event) {
-    if (event.target == modalEinnahme) {
-        modalEinnahme.style.display = "none";
-    }
-}
-window.onclick = function (event) {
-    if (event.target == modalAusgabe) {
-        modalAusgabe.style.display = "none";
-    }
-}
 btnEingabeEinnahme.onclick = function (event) {
     var eingabeGrund = document.getElementById("einnahmeGrund").value;
     var eingabeMenge = document.getElementById("einnahmeMenge").value;
@@ -56,11 +45,9 @@ btnEingabeEinnahme.onclick = function (event) {
     einnahmeDatumListe.appendChild(li);
 
     modalEinnahme.style.display = "none";
+    document.getElementById("einnahmeGrund").value = "";
+    document.getElementById("einnahmeMenge").value = "";
 }
-
-
-
-
 btnEingabeAusgabe.onclick = function (event) {
     var ausgabeGrund = document.getElementById("ausgabeGrund").value;
     var ausgabeMenge = document.getElementById("ausgabeMenge").value;
@@ -77,12 +64,68 @@ btnEingabeAusgabe.onclick = function (event) {
     li.appendChild(document.createTextNode(ausgabeMenge));
     ausgabeMengeListe.appendChild(li);
 
-
     var heute = new Date();
     var ausgabeDatum = `${heute.getDate()} ${heute.getMonth() + 1} ${heute.getFullYear()}`;
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(ausgabeDatum));
     ausgabeDatumListe.appendChild(li);
 
-    modalAusgabe.style.display = "none";
+    document.getElementById("ausgabeGrund").value = "";
+    document.getElementById("ausgabeMenge").value = "";
+
 }
+
+btnEingabePlan.onclick = function (event) {
+    if (carouselAnzahl === 0) {
+        var planGrund = document.getElementById("planGrund").value;
+        var planMenge = document.getElementById("planMenge").value;
+        var planDauer = document.getElementById("planDauer").value;
+        var plan = [planGrund, planMenge, planDauer];
+        var div = document.getElementById("carouselItemFirst");
+        div.removeChild(div.firstChild);
+        div.removeChild(div.firstChild);
+        div.removeChild(div.firstChild);
+        for (let i = 0; i < 3; i++) {
+            var br = document.createElement("br");
+            switch (i) {
+                case 0: div.appendChild(document.createTextNode(`Du sparst für: ${plan[i]}`)); break
+                case 1: div.appendChild(document.createTextNode(`Du sparst: ${plan[i]}€`)); break
+                case 2: div.appendChild(document.createTextNode(`Du sparst bis: ${plan[i]} Tage`)); break
+            }
+
+            div.appendChild(br)
+        }
+        s
+        div.classList.add("carousel-item", "aktive")
+        carouselItemFirst.appendChild(div);
+        document.getElementById("planGrund").value = "";
+        document.getElementById("planMenge").value = "";
+        document.getElementById("planDauer").value = "";
+        carouselAnzahl++;
+
+    } else {
+        var planGrund = document.getElementById("planGrund").value;
+        var planMenge = document.getElementById("planMenge").value;
+        var planDauer = document.getElementById("planDauer").value;
+        var plan = [planGrund, planMenge, planDauer];
+        var div = document.createElement("div");
+
+        for (let i = 0; i < 3; i++) {
+            var br = document.createElement("br");
+            switch (i) {
+                case 0: div.appendChild(document.createTextNode(`Du sparst für: ${plan[i]}`)); break
+                case 1: div.appendChild(document.createTextNode(`Du sparst: ${plan[i]}€`)); break
+                case 2: div.appendChild(document.createTextNode(`Du sparst bis: ${plan[i]} Tage`)); break
+            }
+
+            div.appendChild(br)
+        }
+
+        div.classList.add("carousel-item")
+        planCarousel.appendChild(div);
+        document.getElementById("planGrund").value = "";
+        document.getElementById("planMenge").value = "";
+        document.getElementById("planDauer").value = "";
+    }
+}
+

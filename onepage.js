@@ -125,7 +125,6 @@ btnEingabePlan.onclick = function (event) {
                 planNummer: carouselAnzahl
             }
             let plan = [planGrund, planMenge, planDauer];
-            let div = document.createElement("div");
             for (let i = 0; i < 3; i++) {
 
                 carouselItemFirst.removeChild(carouselItemFirst.firstChild);
@@ -138,15 +137,16 @@ btnEingabePlan.onclick = function (event) {
                     case 0: carouselItemFirst.appendChild(document.createTextNode(`Du sparst für: ${plan[i]}`)); break
                     case 1: carouselItemFirst.appendChild(document.createTextNode(`Dir fehlen: ${plan[i]} €`)); break
                     case 2: carouselItemFirst.appendChild(document.createTextNode(`Du sparst: ${plan[i]} Tage`)); break
-
-
                 }
             }
+            for (let carouselItem of document.querySelectorAll(".carousel-item")) {
+                carouselItem.classList.remove("carousel-item", "active")
+            }
+            carouselItemFirst.classList.add("carousel-item", "active");
             let br = document.createElement("br");
             carouselItemFirst.appendChild(br)
             carouselItemFirst.appendChild(document.createTextNode(`Empfehlung: ${Math.round((plan[1] / plan[2]) * 100) / 100}€ pro Tag`));
             carouselItemFirst.id = `plan${carouselAnzahl}`;
-            planCarousel.appendChild(div);
             document.getElementById("planGrund").value = "";
             document.getElementById("planMenge").value = "";
             document.getElementById("planDauer").value = "";
@@ -180,7 +180,7 @@ btnEingabePlan.onclick = function (event) {
             div.appendChild(document.createTextNode(`Empfehlung: ${Math.round((plan[1] / plan[2]) * 100) / 100}€ pro Tag`));
             div.classList.add("carousel-item", "active");
             div.id = `plan${carouselAnzahl}`;
-            planCarousel.appendChild(div);
+            document.getElementById("plan0").parentNode.appendChild(div);
             document.getElementById("planGrund").value = "";
             document.getElementById("planMenge").value = "";
             document.getElementById("planDauer").value = "";
@@ -276,6 +276,6 @@ function onlyOne(checkbox) {
         if (item !== checkbox) item.checked = false
     })
 }
-function planLöschen() {
-
+function planLöschen(planid) {
+    planid.parentNode.removeChild(planid);
 }

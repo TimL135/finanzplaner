@@ -122,7 +122,8 @@ btnEingabePlan.onclick = function (event) {
                 planGrund: planGrund,
                 planMenge: planMenge,
                 planDauer: planDauer,
-                planNummer: carouselAnzahl
+                planNummer: carouselAnzahl,
+                planGelöscht: false
             }
             let plan = [planGrund, planMenge, planDauer];
             for (let i = 0; i < 3; i++) {
@@ -152,13 +153,15 @@ btnEingabePlan.onclick = function (event) {
             document.getElementById("planDauer").value = "";
             checkboxErstellen(planGrund, carouselAnzahl);
             carouselAnzahl++;
+
         } else {
 
             objectPlan[carouselAnzahl] = {
                 planGrund: planGrund,
                 planMenge: planMenge,
                 planDauer: planDauer,
-                planNummer: carouselAnzahl
+                planNummer: carouselAnzahl,
+                planGelöscht: false
             }
             let plan = [planGrund, planMenge, planDauer];
             let div = document.createElement("div");
@@ -180,12 +183,18 @@ btnEingabePlan.onclick = function (event) {
             div.appendChild(document.createTextNode(`Empfehlung: ${Math.round((plan[1] / plan[2]) * 100) / 100}€ pro Tag`));
             div.classList.add("carousel-item", "active");
             div.id = `plan${carouselAnzahl}`;
-            document.getElementById("plan0").parentNode.appendChild(div);
+            document.getElementById("carousel").appendChild(div);
             document.getElementById("planGrund").value = "";
             document.getElementById("planMenge").value = "";
             document.getElementById("planDauer").value = "";
             checkboxErstellen(planGrund, carouselAnzahl);
             carouselAnzahl++;
+
+            if (document.getElementById("löschmich") !== null) {
+                document.getElementById("löschmich").remove("löschmich")
+            }
+
+
         }
     }
 }
@@ -276,6 +285,28 @@ function onlyOne(checkbox) {
         if (item !== checkbox) item.checked = false
     })
 }
-function planLöschen(planid) {
-    planid.parentNode.removeChild(planid);
+function planLöschen(planNummer) {
+    planid = document.getElementById(`plan${planNummer}`)
+    console.log(document.querySelectorAll(".carousel-item").length)
+    if (document.querySelectorAll(".carousel-item").length > 1) {
+        planid.parentNode.removeChild(planid);
+        objectPlan[planNummer].planGelöscht = true;
+        let i = 0;
+        while (objectPlan[i].planGelöscht) {
+            i++;
+        }
+        document.getElementById(`plan${i}`).classList.add("carousel-item", "active");
+
+    } else {
+        div = document.createElement("div");
+        br = document.createElement("br")
+        div.appendChild(document.createTextNode("Du Hast noch keinen Plan"));
+        div.appendChild(br);
+        div.appendChild(document.createTextNode("Drücke den Knopf um einen zu erstellen"));
+        div.classList.add("carousel-item", "active");
+        div.id = "löschmich"
+        document.getElementById("carousel").appendChild(div);
+        planid.parentNode.removeChild(planid);
+        objectPlan[planNummer].planGelöscht = true;
+    }
 }

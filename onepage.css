@@ -8,6 +8,8 @@ h1{
     height: 70px;   
 } 
 li{
-    list-style: none;
-    
+    list-style: none;   
+}
+ul{
+    padding-left: 0px;
 }

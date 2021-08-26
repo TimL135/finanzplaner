@@ -155,6 +155,7 @@ btnEingabePlan.onclick = function (event) {
             document.getElementById("planDauer").value = "";
 
             selectOptionErstellen("inputGroupSelect01", `Plan ${carouselAnzahl + 1}`, `${carouselAnzahl + 1}`)
+            selectOptionErstellen("inputGroupSelect02", `Plan ${carouselAnzahl + 1}`, `${carouselAnzahl + 1}`)
 
             checkboxErstellen(planGrund, carouselAnzahl);
             carouselAnzahl++;
@@ -191,6 +192,7 @@ btnEingabePlan.onclick = function (event) {
             document.getElementById("planMenge").value = "";
             document.getElementById("planDauer").value = "";
             selectOptionErstellen("inputGroupSelect01", `Plan ${carouselAnzahl + 1}`, `${carouselAnzahl + 1}`)
+            selectOptionErstellen("inputGroupSelect02", `Plan ${carouselAnzahl + 1}`, `${carouselAnzahl + 1}`)
             checkboxErstellen(planGrund, carouselAnzahl);
             carouselAnzahl++;
 
@@ -245,20 +247,20 @@ function gesamtBerechnen() {
     return gesamt;
 }
 plänebearbeiten.onclick = function (event) {
-    let planNummer = document.getElementById("planEditNummer").value
+    // let planNummer = document.getElementById("planEditNummer").value
     let planGrund = document.getElementById("planEditGrund").value
     let planDauer = document.getElementById("planEditDauer").value
     let planMenge = document.getElementById("planEditMenge").value
-
-    if (planNummer && planGrund != "") {
+    let x = document.getElementById("inputGroupSelect01")
+    if (planGrund != "") {
         if (planDauer && planMenge != "") {
-            planNummer--
-            let planid = document.getElementById(`plan${planNummer}`)
+            let planid = document.getElementById(`plan${x.value - 1}`)
             document.getElementById("planEditGrund").value = ""
             document.getElementById("planEditDauer").value = ""
             document.getElementById("planEditMenge").value = ""
-            document.getElementById("planEditNummer").value = ""
-            planChange(planNummer, planid, planGrund, planDauer, planMenge)
+            // document.getElementById("planEditNummer").value = ""
+
+            planChange(x.selectedIndex - 1, planid, planGrund, planDauer, planMenge)
         }
     }
 }
@@ -307,6 +309,7 @@ function planLöschen(planNummer) {
         document.getElementById(`checkbox${planNummer}`).remove();
         document.getElementById(`label${planNummer}`).remove();
         selectOptionLöschen("inputGroupSelect01")
+        // selectOptionLöschen("inputGroupSelect02")
     } else {
         document.getElementById("planBearbeitenKnopf").classList.add("d-none")
         document.getElementById("planLöschenKnopf").classList.add("d-none")
@@ -323,6 +326,7 @@ function planLöschen(planNummer) {
         document.getElementById(`checkbox${planNummer}`).remove();
         document.getElementById(`label${planNummer}`).remove();
         selectOptionLöschen("inputGroupSelect01")
+        // selectOptionLöschen("inputGroupSelect02")
     }
 }
 function selectOptionErstellen(inputGroupSelect, inputGroupSelectValue, inputGroupSelectnumber) {
@@ -330,8 +334,11 @@ function selectOptionErstellen(inputGroupSelect, inputGroupSelectValue, inputGro
 }
 function selectOptionLöschen(inputGroupSelect) {
     let x = document.getElementById(inputGroupSelect);
+    let y = document.getElementById("inputGroupSelect02");
+    y.remove(x.selectedIndex)
     x.remove(x.selectedIndex)
-    document.getElementById(inputGroupSelect).selectedIndex = 0;
+    x.selectedIndex = 0;
+    y.selectedIndex = 0;
     optionValue++;
 }
 function PlanZuNummer(Plannumber, number) {

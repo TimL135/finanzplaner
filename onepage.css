@@ -13,3 +13,6 @@ li{
 ul{
     padding-left: 0px;
 }
+.form-control{
+border-radius: .3rem !important; 
+} 
